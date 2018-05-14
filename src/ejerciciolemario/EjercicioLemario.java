@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,7 +20,8 @@ import java.util.logging.Logger;
 public class EjercicioLemario 
 {
     
-    ArrayList<String> lemario = new ArrayList();
+    //ArrayList<String> lemario = new ArrayList();
+    HashMap<String, String> lemario = new HashMap<>();
     
     public void cargaFicheroLemario()
     {
@@ -34,7 +36,7 @@ public class EjercicioLemario
             while ((linea = br.readLine()) != null)
             {
                 linea = limpiarAcentos(linea);
-                lemario.add(linea);
+                lemario.put(linea, linea);
             } 
             
         } 
@@ -50,7 +52,7 @@ public class EjercicioLemario
     
     public boolean buscar(String palabra)
     {
-        if(lemario.contains(palabra))
+        if(lemario.containsKey(palabra))
         {
             return true;
         }
