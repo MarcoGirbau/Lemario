@@ -37,8 +37,7 @@ public class EjercicioLemario
             {
                 linea = limpiarAcentos(linea);
                 lemario.put(linea, linea);
-            } 
-            
+            }    
         } 
         catch (FileNotFoundException ex) 
         {
@@ -65,17 +64,24 @@ public class EjercicioLemario
         boolean sifilis = true;
 	boolean cancer = true;
         int sida;
-	for (int i = 0; i < escalera.size() - 1 && cancer; i++) 
+	for (int i = 0; i < escalera.size()-1 && cancer; i++) 
         {	
             sifilis = buscar(escalera.get(i));
             if(!sifilis)
             {
+                System.out.println("La palabra "+escalera.get(i)+" no existe");
+                return false;
+            }
+            sifilis = buscar(escalera.get(i+1));
+            if(!sifilis)
+            {
+                System.out.println("La palabra "+escalera.get(i+1)+" no existe");
                 return false;
             }
             sida = 0;//Se establece aqui a 0 para que cada vez que entre al for se ponga a 0 otra vez
 	    if (escalera.get(i + 1).length() == escalera.get(i).length()) 
             {		
-		for (int j = 0; j < escalera.get(i).length(); j++) 
+		for (int j = 0; j < escalera.get(i).length()&&cancer; j++) 
                 {
                     if(escalera.get(i).charAt(j) != escalera.get(i + 1).charAt(j))
                     {
@@ -84,6 +90,7 @@ public class EjercicioLemario
                     if(sida > 1)//El fallo que tenia era (aparte de ser subnormal)era que tenia que si sida era mayor que 0 de
                                 //false, sin embargo como debe ser 1 ya que tiene que ser una letra diferente
                     {
+                        System.out.println("La palabra "+escalera.get(i+1)+" cambia en mas de una letra");
                         cancer = false;
                     }
                     if(!sifilis)
@@ -91,7 +98,15 @@ public class EjercicioLemario
                         cancer = false;
                     }
 		}
-	    } 
+                if(sida==0){
+                    System.out.println("La palabra "+escalera.get(i+1)+" es igual a la anterior");
+                    return false;
+                }
+	    }
+            else{
+                System.out.println("La palabra "+escalera.get(i+1)+" es demasiado larga");
+                return false;
+            }
 	}
 	return cancer;
     }
@@ -128,8 +143,10 @@ public class EjercicioLemario
         listaPalabras.add("MATO");
         listaPalabras.add("MAJO");
         listaPalabras.add("MAGO");
-        listaPalabras.add("MAJO");
+        listaPalabras.add("MAGO");
+        
         
         System.out.println(ejercicio.escaleraDePalabras(listaPalabras));
+//        System.out.println(ejercicio.buscar("MAGA"));
     }
 }
